@@ -1,0 +1,217 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package atm.pkginterface.application;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author hp
+ */
+public class ATM {
+
+    static boolean withdraw(double amount) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+    private double amount;
+    private double deposit;
+    private double withdraw;
+    private double balance;
+
+    public ATM() {
+    }
+
+    public ATM(double deposit, double withdraw, double balance) {
+        this.deposit = deposit;
+        this.withdraw = withdraw;
+        this.balance = balance;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
+    }
+
+    public double getWithdraw() {
+        return withdraw;
+    }
+
+    public void setWithdraw(double withdraw) {
+        this.withdraw = withdraw;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "ATM{" + "deposit=" + deposit + ", withdraw=" + withdraw + ", balance=" + balance + '}';
+    }
+
+    void deposit(double amount) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    void displayOptions() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void handleChoice(int choice, Scanner scanner) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+}
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package atm.pkginterface.application;
+
+/**
+ *
+ * @author hp
+ */
+public interface ATMInterface {
+    
+    public void deposit(Double amount, Double balance);
+    public void withdraw(Double amount, Double balance);
+    public void balance(Double amount, Double balance);
+    
+}
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package atm.pkginterface.application;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author hp
+ */
+public class ATMManager {
+    
+    ATM atm =  new ATM();
+   
+    // Method to display ATM options
+    public void displayOptions() {
+        System.out.println("Welcome to the ATM!");
+        System.out.println("1. Check Balance");
+        System.out.println("2. Deposit");
+        System.out.println("3. Withdraw");
+        System.out.println("4. Exit");
+    }
+
+    // Method to handle user choice
+    public void handleChoice(int choice, Scanner scanner) {
+        switch (choice) {
+            case 1:
+                checkBalance();
+                break;
+            case 2:
+                System.out.print("Enter deposit amount: ");
+                double depositAmount = scanner.nextDouble();
+                deposit(depositAmount);
+                break;
+            case 3:
+                System.out.print("Enter withdrawal amount: ");
+                double withdrawAmount = scanner.nextDouble();
+                withdraw(withdrawAmount);
+                break;
+            case 4:
+                System.out.println("Thank you for using the ATM!");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid choice! Please choose a valid option.");
+        }
+    }
+
+     double balance;
+      
+    // Method to check balance
+    public void checkBalance() {
+        System.out.println("Your current balance is: $" + atm.getBalance());
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+         balance += amount;
+        atm.deposit(amount);
+        System.out.println("Deposit of $" + amount + " successful.");
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (ATM.withdraw(amount)) {
+             balance -= amount;
+            System.out.println("Withdrawal of $" + amount + " successful.");
+        } else {
+            System.out.println("Insufficient funds! Withdrawal failed.");
+        }
+    }
+    
+}
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package atm.pkginterface.application;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author hp
+ */
+public class ATMInterfaceApplication {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        ATMManager atmManager = new ATMManager(); // Initial balance is $1000
+        ATM atm = new ATM();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            atm.displayOptions();
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            atm.ATMManager();
+        }
+   
+    }
+}
